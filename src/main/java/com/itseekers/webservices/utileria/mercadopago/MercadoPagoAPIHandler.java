@@ -29,8 +29,8 @@ public class MercadoPagoAPIHandler {
 
     private static String clientId = "6413807072217680";
     private static String clientSecret = "TDDkUAk9N58JB6KHfrTxBs5VgUJvxvWf";
-    //private static String access_token = "TEST-6413807072217680-072814-f2a7f33b190ea86b43a6b1085e1b1c9f__LC_LA__-264377148";
-    private static String access_token = "APP_USR-6413807072217680-072814-ee1316a2667be92033e01e47900f4674__LC_LD__-264377148";
+    private static String access_token = "TEST-6413807072217680-072814-f2a7f33b190ea86b43a6b1085e1b1c9f__LC_LA__-264377148";
+//    private static String access_token = "APP_USR-6413807072217680-072814-ee1316a2667be92033e01e47900f4674__LC_LD__-264377148";
     private static String UrlApiSandbox = "https://api.mercadopago.com";
 
 
