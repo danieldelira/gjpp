@@ -211,4 +211,9 @@ public class Movimiento implements Serializable {
         this.tipoMovimiento = tipoMovimiento;
     }
 
+    @Override
+    public String toString() {
+        return "Movimiento{" + "idMovimiento=" + idMovimiento + ", fechaMovimiento=" + fechaMovimiento + ", url=" + url + ", cantidad=" + cantidad + ", tipoPago=" + tipoPago + ", proveedor=" + proveedor + ", saldoAnterior=" + saldoAnterior + ", saldo=" + saldo + ", ticket=" + ticket + ", orden=" + orden + ", cliente=" + cliente + ", tipoMovimiento=" + tipoMovimiento + '}';
+    }
+
 }

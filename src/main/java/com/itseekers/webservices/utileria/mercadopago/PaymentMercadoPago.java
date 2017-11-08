@@ -16,7 +16,7 @@ import java.util.List;
 @JsonRootName(value = "Payment")
 public class PaymentMercadoPago {
 
-    private int id;
+    private long id;
     private String date_created;
     private String date_approved;
     private String date_last_updated;
@@ -53,7 +53,7 @@ public class PaymentMercadoPago {
     private Object notification_url;
     private List<Object> refunds;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -195,6 +195,11 @@ public class PaymentMercadoPago {
 
     public List<Object> getRefunds() {
         return refunds;
+    }
+
+    @Override
+    public String toString() {
+        return "PaymentMercadoPago{" + "id=" + id + ", date_created=" + date_created + ", date_approved=" + date_approved + ", date_last_updated=" + date_last_updated + ", money_release_date=" + money_release_date + ", operation_type=" + operation_type + ", issuer_id=" + issuer_id + ", payment_method_id=" + payment_method_id + ", payment_type_id=" + payment_type_id + ", status=" + status + ", status_detail=" + status_detail + ", currency_id=" + currency_id + ", description=" + description + ", live_mode=" + live_mode + ", sponsor_id=" + sponsor_id + ", authorization_code=" + authorization_code + ", collector_id=" + collector_id + ", payer=" + payer + ", metadata=" + metadata + ", order=" + order + ", external_reference=" + external_reference + ", transaction_amount=" + transaction_amount + ", transaction_amount_refunded=" + transaction_amount_refunded + ", coupon_amount=" + coupon_amount + ", differential_pricing_id=" + differential_pricing_id + ", deduction_schema=" + deduction_schema + ", transaction_details=" + transaction_details + ", fee_details=" + fee_details + ", captured=" + captured + ", binary_mode=" + binary_mode + ", call_for_authorize_id=" + call_for_authorize_id + ", statement_descriptor=" + statement_descriptor + ", installments=" + installments + ", card=" + card + ", notification_url=" + notification_url + ", refunds=" + refunds + '}';
     }
 
 }

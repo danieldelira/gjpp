@@ -116,9 +116,9 @@ public class ClienteServiceImpl extends CodigoResponse implements ClienteService
         if (agregarSaldo.getPaymentMethod().equals("MercadoPago")) {
             PaymentMercadoPago payment = MercadoPagoAPIHandler.executePaymentMercadoPago(agregarSaldo.getPayOrder());
 //           evaluamos la compra este correcta
-            if (!payment.getStatus().equalsIgnoreCase("approved")) {
-                return new ResponseEntity<>(new SaldoRespose(this.Error, "Error con la compra de paypal"), HttpStatus.OK);
-            }
+                if ((payment==null)||!payment.getStatus().equalsIgnoreCase("approved")) {
+                    return new ResponseEntity<>(new SaldoRespose(this.Error, "Error con la compra de paypal"), HttpStatus.OK);
+                }
             recarga.setTicket(String.valueOf(payment.getId()));
             recarga.setCantidad(payment.getTransaction_amount());
             recarga.setTipoPago(payment.getPayment_method_id());

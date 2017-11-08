@@ -33,5 +33,10 @@ public class PaypalData {
     public List<Link> getLinks() {
         return links;
     }
+
+    @Override
+    public String toString() {
+        return "PaypalData{" + "paymentId=" + paymentId + ", token=" + token + ", payerID=" + payerID + ", links=" + links + '}';
+    }
     
 }

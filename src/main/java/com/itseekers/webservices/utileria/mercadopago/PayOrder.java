@@ -74,5 +74,10 @@ public class PayOrder {
         return additional_info;
     }
 
+    @Override
+    public String toString() {
+        return "PayOrder{" + "transaction_amount=" + transaction_amount + ", token=" + token + ", description=" + description + ", installments=" + installments + ", payment_method_id=" + payment_method_id + ", payer=" + payer + ", external_reference=" + external_reference + ", metadata=" + metadata + ", statement_descriptor=" + statement_descriptor + ", notification_url=" + notification_url + ", additional_info=" + additional_info + '}';
+    }
+
     
 }

@@ -35,7 +35,10 @@ public class AgregarSaldo {
     public String getPaymentMethod() {
         return paymentMethod;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return "AgregarSaldo{" + "payOrder=" + payOrder + ", paypalData=" + paypalData + ", clienteId=" + clienteId + ", paymentMethod=" + paymentMethod + '}';
+    }
     
 }
