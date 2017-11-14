@@ -576,11 +576,9 @@ public class OrdenDaoImpl implements OrdenDao {
             }
             
             Calendar fechaProgramada = Calendar.getInstance();
-            fechaProgramada.add(Calendar.MINUTE, 5);
+            fechaProgramada.add(Calendar.SECOND, 27);
             Orden orden = new Orden(Calendar.getInstance().getTime(), total, status, generarTicket(6), franquicia, 5, fechaProgramada.getTime(),comanda.getNombreCliente(),comanda.getUbicacion(),comanda.getTipoPago());
             session.save(orden);
-            
-            
             
             for (ProductoDetalles productoDetalles : comanda.getProductoDetallesList()) {
                 Criteria productoCriteria = session.createCriteria(PrecioTamanoProducto.class)
