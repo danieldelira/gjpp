@@ -14,6 +14,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
@@ -25,7 +26,10 @@ import org.apache.commons.codec.binary.Base64;
  *
  * @author IT-Seekers
  */
-public class MercadoPagoAPIHandler {
+public class MercadoPagoAPIHandler { 
+    
+    private static final org.apache.log4j.Logger LOGGER = org.apache.log4j.Logger.getLogger(MercadoPagoAPIHandler.class);    
+    private static final String  CLASS_NAME = " <<< MercadoPagoAPIHandler >>>  -->   ";
 
     private static String clientId = "6413807072217680";
     private static String clientSecret = "TDDkUAk9N58JB6KHfrTxBs5VgUJvxvWf";
@@ -78,10 +82,12 @@ public class MercadoPagoAPIHandler {
     }
 
     public static PaymentMercadoPago executePaymentMercadoPago(PayOrder payOrder) {
+        LOGGER.info(CLASS_NAME+"PayOrder "+payOrder+" ["+new Date()+"]");
         try {
             //Create connection
             String urlFinal = String.format("%s%s%s",UrlApiSandbox,"/v1/payments?access_token=",access_token);
             URL url = new URL(urlFinal);
+            LOGGER.info(CLASS_NAME+"URL  "+url.getPath()+" ["+new Date()+"]");
                
             HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
@@ -94,32 +100,40 @@ public class MercadoPagoAPIHandler {
             //String jsonData = String.format("{ \"payer_id\":\"%s\"}", payerId);
             Gson gson = new Gson();
             String jsonData = gson.toJson(payOrder);
+            LOGGER.info(CLASS_NAME+"PayOrder GSON  "+jsonData+" ["+new Date()+"]");
             
             try {
+                LOGGER.info(CLASS_NAME+"SENDING PayOrder "+jsonData+" ["+new Date()+"]");
                 // Post the data:
                 DataOutputStream output = new DataOutputStream(connection.getOutputStream());
                 output.writeBytes(jsonData);
                 output.close();
+                LOGGER.info(CLASS_NAME+"RECIVING PayOrder "+jsonData+" ["+new Date()+"]");
                 InputStream inputStream = connection.getInputStream();
                 // Read the response:
                 BufferedReader in = new BufferedReader(new InputStreamReader( inputStream ));
-                String inputLine;
-
+                String inputLine;                
+                LOGGER.info(CLASS_NAME+"PARSING PayOrder "+jsonData+" ["+new Date()+"]");
                 StringBuffer response = new StringBuffer();
                 while ((inputLine = in.readLine()) != null) {
                     response.append(inputLine);
                 }
                 in.close();
                 //Deserializer string
-                PaymentMercadoPago payment = gson.fromJson(response.toString(), PaymentMercadoPago.class);
+                PaymentMercadoPago payment = gson.fromJson(response.toString(), PaymentMercadoPago.class);                
+                LOGGER.info(CLASS_NAME+"PAYMENT ANSWER  "+payment.toString()+" ["+new Date()+"]");
                 return payment;
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
         } catch (MalformedURLException ex) {
+            LOGGER.error(CLASS_NAME+" PayOrder "+payOrder+" ["+new Date()+"] ->  "+ex.getMessage(),ex);
             Logger.getLogger(MercadoPagoAPIHandler.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
+            LOGGER.error(CLASS_NAME+" PayOrder "+payOrder+" ["+new Date()+"] ->  "+ex.getMessage(),ex);
             Logger.getLogger(MercadoPagoAPIHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }catch(Exception e){
+            LOGGER.error(CLASS_NAME+" PayOrder "+payOrder+" ["+new Date()+"] ->  "+e.getMessage(),e);
         }
         return null;
     }
